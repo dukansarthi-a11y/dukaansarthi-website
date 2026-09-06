@@ -15,7 +15,7 @@ export default function Pricing() {
         lifetime: 15999
       },
       renewal: "₹2,999",
-      ctaText: "Book a Free Demo",
+      ctaText: "Book Free Demo",
       features: [
         { text: "3 Users Login License", included: true },
         { text: "1 Store / Location Setup", included: true },
@@ -38,7 +38,7 @@ export default function Pricing() {
       },
       renewal: "₹3,999",
       popular: true,
-      ctaText: "Start 7-Day Trial",
+      ctaText: "Book Free Demo",
       features: [
         { text: "10 Users Login License", included: true },
         { text: "1 Store with Multi-Device Sync", included: true },
@@ -60,7 +60,7 @@ export default function Pricing() {
         lifetime: 31999
       },
       renewal: "₹4,999",
-      ctaText: "Contact for Custom Setup",
+      ctaText: "Book Free Demo",
       features: [
         { text: "Unlimited Users Login License", included: true },
         { text: "Multi-Store Sync & Stock Transfers", included: true },
@@ -84,7 +84,7 @@ export default function Pricing() {
       price: 30999,
       renewal: "₹8,999",
       validity: "1 Year Validity",
-      ctaText: "Connect Shopify Store",
+      ctaText: "Book Free Demo",
       features: [
         { text: "1 Outlet ERP Connected with Shopify", included: true },
         { text: "Unlimited Users License in ERP", included: true },
@@ -105,7 +105,7 @@ export default function Pricing() {
       renewal: "₹8,999",
       popular: true,
       validity: "1 Year Validity",
-      ctaText: "Connect WooCommerce Store",
+      ctaText: "Book Free Demo",
       features: [
         { text: "1 Outlet ERP Connected with WooCommerce", included: true },
         { text: "Unlimited Users License in ERP", included: true },
@@ -125,7 +125,7 @@ export default function Pricing() {
       price: 30999,
       renewal: "₹12,999",
       validity: "1 Year Validity",
-      ctaText: "Connect EasyEcom Channels",
+      ctaText: "Book Free Demo",
       features: [
         { text: "Connected with EasyEcom Multi-Channel", included: true },
         { text: "Sync Amazon, Flipkart, Myntra & more", included: true },
@@ -263,7 +263,7 @@ export default function Pricing() {
                     <p className="plan-desc">{plan.description}</p>
                     
                     <div className="plan-price-row">
-                      <span className="plan-price text-gradient">{priceDisplay}</span>
+                      <span className="plan-price text-gradient">{priceDisplay} <span style={{fontSize: "0.45em", color: "var(--text-muted)", fontWeight: "normal"}}>+18% GST</span></span>
                       <div className="plan-validity-box">
                         <span className="plan-subtext">{validityText}</span>
                         <span className="plan-renewal-sub">{renewalText}</span>
@@ -309,7 +309,7 @@ export default function Pricing() {
                     <p className="plan-desc">{plan.description}</p>
                     
                     <div className="plan-price-row">
-                      <span className="plan-price text-gradient">{priceDisplay}</span>
+                      <span className="plan-price text-gradient">{priceDisplay} <span style={{fontSize: "0.45em", color: "var(--text-muted)", fontWeight: "normal"}}>+18% GST</span></span>
                       <div className="plan-validity-box">
                         <span className="plan-subtext">{plan.validity}</span>
                         <span className="plan-renewal-sub">{renewalText}</span>

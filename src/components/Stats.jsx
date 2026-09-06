@@ -5,7 +5,7 @@ export default function Stats() {
   const statsData = [
     {
       icon: <Users size={28} />,
-      value: "1,000+",
+      value: "2500+",
       label: "Active Businesses",
       description: "Retailers, wholesalers & distributors trust us daily."
     },

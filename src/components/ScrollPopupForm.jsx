@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { X, Send, Calendar, CheckCircle } from 'lucide-react';
+import { X, Send, Calendar, CheckCircle, ArrowRight, MessageCircle } from 'lucide-react';
 
 export default function ScrollPopupForm() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,10 +11,11 @@ export default function ScrollPopupForm() {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    businessType: 'retail' // default
+    businessType: 'retail'
   });
 
   useEffect(() => {
+    // 2. Trigger on scroll (like before)
     const handleScroll = () => {
       if (hasTriggered) return;
 
@@ -24,16 +25,27 @@ export default function ScrollPopupForm() {
       
       const scrollPercentage = (scrollPosition / (documentHeight - windowHeight)) * 100;
 
-      if (scrollPercentage > 50) {
+      // Opens when scrolled 40% down the page
+      if (scrollPercentage > 40) {
+        setIsOpen(true);
+        setHasTriggered(true);
+      }
+    };
+
+    // 3. Trigger on exit intent
+    const handleMouseLeave = (e) => {
+      if (e.clientY <= 0 && !hasTriggered) {
         setIsOpen(true);
         setHasTriggered(true);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
+    document.addEventListener('mouseleave', handleMouseLeave);
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, [hasTriggered]);
 
@@ -52,7 +64,7 @@ export default function ScrollPopupForm() {
         },
         body: JSON.stringify({
           ...formData,
-          businessName: 'Via Demo Popup' // Tagging origin
+          businessName: 'Via Demo Popup'
         }),
       });
 
@@ -66,118 +78,318 @@ export default function ScrollPopupForm() {
       }
     } catch (err) {
       console.error('Error submitting form:', err);
-      // Even if network fails, we can show success for UI demo purposes if needed,
-      // but alerting is safer if they actually rely on DB.
       alert('Network error. Could not save enquiry.');
     } finally {
       setLoading(false);
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="popup-overlay">
-      <div className="popup-modal fade-in-up">
-        <button className="popup-close" onClick={() => setIsOpen(false)} aria-label="Close form">
-          <X size={20} />
-        </button>
+    <>
+      {/* Floating Buttons */}
+      {!isOpen && (
+        <div className="floating-buttons-container">
+          <a 
+            href="https://wa.me/919873234071" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="floating-wa-btn"
+            aria-label="Chat on WhatsApp"
+          >
+            <MessageCircle size={28} />
+          </a>
 
-        {!isSubmitted ? (
-          <div className="popup-content">
-            <div className="popup-header">
-              <div className="badge badge-primary popup-badge">
-                <Calendar size={14} /> FREE DEMO
-              </div>
-              <h3>Ready to Grow Your Dukaan?</h3>
-              <p>See exactly how DukaanSarthi can automate your shop and boost your sales.</p>
+          <button 
+            className="floating-demo-btn"
+            onClick={() => setIsOpen(true)}
+            aria-label="Book Free Demo"
+          >
+            <div className="btn-content">
+              <Calendar size={24} />
+              <span className="btn-text">Free Demo</span>
             </div>
+            <div className="pulse-ring"></div>
+          </button>
+        </div>
+      )}
 
-            <form onSubmit={handleSubmit} className="popup-form">
-              <div className="form-group">
-                <label>Your Name</label>
-                <input 
-                  type="text" 
-                  placeholder="e.g. Ramesh Kumar" 
-                  required 
-                  value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                />
-              </div>
-              
-              <div className="form-group">
-                <label>WhatsApp Number</label>
-                <input 
-                  type="tel" 
-                  placeholder="10-digit mobile number" 
-                  required 
-                  pattern="[0-9]{10}"
-                  value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                />
-              </div>
+      {isOpen && (
+        <div className="popup-overlay">
+          <div className="popup-modal marketing-modal fade-in-up">
+            <button className="popup-close" onClick={() => setIsOpen(false)} aria-label="Close form">
+              <X size={20} />
+            </button>
 
-              <div className="form-group">
-                <label>Business Type</label>
-                <select 
-                  required 
-                  value={formData.businessType}
-                  onChange={(e) => setFormData({...formData, businessType: e.target.value})}
-                >
-                  <option value="" disabled>Select your business</option>
-                  <option value="grocery">Supermarket / Grocery</option>
-                  <option value="garments">Garments / Footwear</option>
-                  <option value="electronics">Electronics / Mobile</option>
-                  <option value="hardware">Hardware / Sanitary</option>
-                  <option value="retail">Other Retail</option>
-                </select>
-              </div>
+            {!isSubmitted ? (
+              <div className="modal-split">
+                
+                {/* Left Side: Marketing / Branding */}
+                <div className="modal-marketing">
+                  <div className="marketing-content">
+                    <h3>Still Making Paper Bills?</h3>
+                    <h2>Switch to <span className="text-highlight">DukaanSarthi</span></h2>
+                    <p className="marketing-sub">Businesses using DukaanSarthi report <strong>3X faster checkout</strong> and completely organized inventory!</p>
+                    
+                    <div className="stats-row">
+                      <div className="stat-box">
+                        <h4>2500+</h4>
+                        <span>Happy Shops</span>
+                      </div>
+                      <div className="stat-box">
+                        <h4>4.9 ⭐</h4>
+                        <span>User Rating</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Decorative Visual */}
+                  <div className="visual-graphic">
+                    <div className="paper-bill">
+                      <div className="line"></div>
+                      <div className="line"></div>
+                      <div className="line short"></div>
+                    </div>
+                    <ArrowRight size={32} className="arrow-icon" color="#fff" />
+                    <div className="digital-bill">
+                      <CheckCircle size={24} color="#10b981" />
+                      <div className="line"></div>
+                      <div className="line short"></div>
+                    </div>
+                  </div>
+                </div>
 
-              <button type="submit" className="btn btn-primary popup-submit-btn" disabled={loading}>
-                {loading ? 'Submitting...' : (
-                  <>Book My Free Demo <Send size={16} /></>
-                )}
-              </button>
-              <p className="popup-privacy">We respect your privacy. No spam.</p>
-            </form>
+                {/* Right Side: Form */}
+                <div className="modal-form-side">
+                  <div className="popup-header">
+                    <div className="badge badge-primary popup-badge">
+                      <Calendar size={14} /> FREE DEMO
+                    </div>
+                    <h3>Start 7 Days Free Trial</h3>
+                    <p>Enter details to get your free trial and a personalized demo.</p>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className="popup-form">
+                    <div className="form-group">
+                      <label>Your Name</label>
+                      <input 
+                        type="text" 
+                        placeholder="e.g. Ramesh Kumar" 
+                        required 
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      />
+                    </div>
+                    
+                    <div className="form-group">
+                      <label>Mobile No</label>
+                      <input 
+                        type="tel" 
+                        placeholder="10-digit mobile number" 
+                        required 
+                        pattern="[0-9]{10}"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label>Business Type</label>
+                      <select 
+                        required 
+                        value={formData.businessType}
+                        onChange={(e) => setFormData({...formData, businessType: e.target.value})}
+                      >
+                        <option value="" disabled>Select your business</option>
+                        <option value="grocery">Supermarket / Grocery</option>
+                        <option value="garments">Garments / Footwear</option>
+                        <option value="electronics">Electronics / Mobile</option>
+                        <option value="hardware">Hardware / Sanitary</option>
+                        <option value="retail">Other Retail</option>
+                      </select>
+                    </div>
+
+                    <button type="submit" className="btn btn-primary popup-submit-btn" disabled={loading}>
+                      {loading ? 'Submitting...' : (
+                        <>Get Free Trial <Send size={16} /></>
+                      )}
+                    </button>
+                    <p className="popup-privacy">We respect your privacy. No spam.</p>
+                  </form>
+                </div>
+
+              </div>
+            ) : (
+              <div className="popup-success">
+                <div className="success-icon-wrap">
+                  <CheckCircle size={48} className="text-teal" />
+                </div>
+                <h3>Demo Requested!</h3>
+                <p>Our ERP expert will contact you on WhatsApp shortly to schedule your personalized demo.</p>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="popup-success">
-            <div className="success-icon-wrap">
-              <CheckCircle size={48} className="text-teal" />
-            </div>
-            <h3>Demo Requested!</h3>
-            <p>Our ERP expert will contact you on WhatsApp shortly to schedule your personalized demo.</p>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <style>{`
         .popup-overlay {
           position: fixed;
           top: 0;
           left: 0;
-          width: 100vw;
+          width: 100%;
           height: 100vh;
-          background: rgba(15, 23, 42, 0.6);
-          backdrop-filter: blur(4px);
-          -webkit-backdrop-filter: blur(4px);
+          height: 100dvh; /* Better mobile height */
+          background: rgba(15, 23, 42, 0.7);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
           z-index: 9999;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 24px;
+          padding: 16px;
         }
 
-        .popup-modal {
+        .marketing-modal {
           background: var(--white);
           width: 100%;
-          max-width: 450px;
+          max-width: 850px;
+          max-height: 90vh;
+          max-height: 90dvh;
+          overflow-y: auto; /* Critical for mobile responsiveness */
           border-radius: var(--radius-lg);
           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
           position: relative;
-          overflow: hidden;
           border: 1px solid var(--border);
+        }
+
+        .modal-split {
+          display: flex;
+          flex-direction: row;
+        }
+
+        .modal-marketing {
+          flex: 1;
+          background: linear-gradient(135deg, var(--primary) 0%, #0891b2 100%);
+          color: white;
+          padding: 40px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          position: relative;
+          overflow: hidden;
+        }
+
+        /* Diagonal overlay pattern */
+        .modal-marketing::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          right: -50%;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.05);
+          transform: rotate(30deg);
+        }
+
+        .marketing-content {
+          position: relative;
+          z-index: 2;
+        }
+
+        .marketing-content h3 {
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 8px;
+          color: rgba(255, 255, 255, 0.9);
+        }
+
+        .marketing-content h2 {
+          font-size: 2.25rem;
+          font-weight: 800;
+          margin-bottom: 16px;
+          line-height: 1.2;
+        }
+
+        .text-highlight {
+          color: #fde047; /* Yellowish highlight */
+        }
+
+        .marketing-sub {
+          font-size: 1.05rem;
+          line-height: 1.5;
+          margin-bottom: 32px;
+          color: rgba(255, 255, 255, 0.9);
+        }
+
+        .stats-row {
+          display: flex;
+          gap: 24px;
+          margin-bottom: 40px;
+        }
+
+        .stat-box h4 {
+          font-size: 1.75rem;
+          font-weight: 700;
+          color: #fde047;
+          margin-bottom: 4px;
+        }
+
+        .stat-box span {
+          font-size: 0.9rem;
+          opacity: 0.9;
+        }
+
+        .visual-graphic {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          z-index: 2;
+          background: rgba(255, 255, 255, 0.1);
+          padding: 24px;
+          border-radius: 12px;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .paper-bill {
+          background: #fecdd3; /* Pinkish paper */
+          width: 80px;
+          height: 100px;
+          border-radius: 4px;
+          padding: 12px;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          box-shadow: -4px 4px 10px rgba(0,0,0,0.1);
+          transform: rotate(-5deg);
+        }
+
+        .digital-bill {
+          background: white;
+          width: 100px;
+          height: 80px;
+          border-radius: 8px;
+          padding: 12px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .paper-bill .line, .digital-bill .line {
+          height: 6px;
+          background: rgba(0,0,0,0.1);
+          border-radius: 4px;
+          width: 100%;
+        }
+        .digital-bill .line { background: #e2e8f0; }
+        .paper-bill .short, .digital-bill .short { width: 60%; }
+
+        .modal-form-side {
+          flex: 1;
+          padding: 40px;
+          background: var(--white);
         }
 
         .fade-in-up {
@@ -213,12 +425,7 @@ export default function ScrollPopupForm() {
           transform: rotate(90deg);
         }
 
-        .popup-content {
-          padding: 40px 32px;
-        }
-
         .popup-header {
-          text-align: center;
           margin-bottom: 24px;
         }
 
@@ -232,6 +439,7 @@ export default function ScrollPopupForm() {
         .popup-header h3 {
           font-size: 1.75rem;
           margin-bottom: 8px;
+          color: var(--dark);
         }
 
         .popup-header p {
@@ -301,7 +509,7 @@ export default function ScrollPopupForm() {
         }
 
         .popup-success {
-          padding: 60px 32px;
+          padding: 80px 40px;
           text-align: center;
           display: flex;
           flex-direction: column;
@@ -325,7 +533,7 @@ export default function ScrollPopupForm() {
         }
         
         .popup-success h3 {
-          font-size: 1.5rem;
+          font-size: 1.75rem;
           color: var(--dark);
         }
         
@@ -334,18 +542,125 @@ export default function ScrollPopupForm() {
           line-height: 1.5;
         }
 
-        @media (max-width: 480px) {
-          .popup-content {
-            padding: 32px 24px;
+        /* Floating Button CSS */
+        .floating-buttons-container {
+          position: fixed;
+          bottom: 24px;
+          right: 24px;
+          z-index: 9998;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 16px;
+        }
+
+        .floating-wa-btn {
+          width: 56px;
+          height: 56px;
+          background: #25D366; /* WhatsApp Green */
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+
+        .floating-wa-btn:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 12px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        .floating-demo-btn {
+          position: relative;
+          background: var(--grad-primary);
+          color: var(--white);
+          border: none;
+          border-radius: 50px;
+          padding: 14px 24px;
+          cursor: pointer;
+          box-shadow: 0 10px 25px -5px rgba(0, 181, 165, 0.4);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          font-family: inherit;
+        }
+
+        .floating-demo-btn:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 30px -5px rgba(0, 181, 165, 0.5);
+        }
+
+        .floating-demo-btn .btn-content {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          position: relative;
+          z-index: 2;
+        }
+
+        .floating-demo-btn .btn-text {
+          font-size: 1.05rem;
+          font-weight: 700;
+        }
+
+        .floating-demo-btn .pulse-ring {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: 50px;
+          background-color: var(--primary);
+          z-index: 1;
+          animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+          0% { transform: scale(1); opacity: 0.6; }
+          100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+          .modal-split {
+            flex-direction: column;
+          }
+          .modal-marketing {
+            padding: 24px;
+          }
+          .visual-graphic {
+            display: none; /* Hide graphic on mobile to save space */
+          }
+          .stats-row {
+            margin-bottom: 0;
+          }
+          .modal-form-side {
+            padding: 24px;
           }
         }
         
+        @media (max-width: 480px) {
+          .floating-buttons-container {
+            bottom: 16px;
+            right: 16px;
+          }
+          .floating-demo-btn {
+            padding: 12px 20px;
+          }
+          .floating-demo-btn .btn-text {
+            font-size: 0.95rem;
+          }
+        }
+
         @media print {
-          .popup-overlay {
+          .popup-overlay, .floating-buttons-container {
             display: none !important;
           }
         }
       `}</style>
-    </div>
+    </>
   );
 }

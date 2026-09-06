@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { Image, WifiOff, ScanLine, Tags, ChefHat } from 'lucide-react';
+import { Image, WifiOff, ScanLine, Tags, ChefHat, ShoppingCart } from 'lucide-react';
 
 export default function PosFeatures() {
   const features = [
@@ -38,6 +38,13 @@ export default function PosFeatures() {
       title: 'Advanced Discounts & Offers',
       description: 'Run powerful campaigns like BOGO, happy hour pricing, festival discounts, and combo offers. Attract more customers with dynamic pricing rules and loyalty points.',
       colorClass: 'feature-color-rose'
+    },
+    {
+      id: 'omnichannel',
+      icon: <ShoppingCart size={32} strokeWidth={2} />,
+      title: 'Omnichannel Integration',
+      description: 'Sell seamlessly across multiple platforms. Manage your retail store, custom e-commerce website, and online marketplaces from a single unified dashboard.',
+      colorClass: 'feature-color-teal'
     }
   ];
 
@@ -48,7 +55,7 @@ export default function PosFeatures() {
           <div className="badge badge-primary">INNOVATIVE TECHNOLOGIES</div>
           <h2 className="with-line center">Smart POS Features Built For Speed</h2>
           <p className="section-subtitle">
-            Leverage cutting-edge automation to minimize billing time, reduce human errors, and maximize your store\'s operational efficiency.
+            Leverage cutting-edge automation to minimize billing time, reduce human errors, and maximize your store&apos;s operational efficiency.
           </p>
         </div>
 
@@ -115,6 +122,7 @@ export default function PosFeatures() {
         .feature-color-purple { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3); }
         .feature-color-rose { background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%); box-shadow: 0 8px 20px rgba(244, 63, 94, 0.3); }
         .feature-color-amber { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3); }
+        .feature-color-teal { background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3); }
 
         .pos-feature-title {
           font-size: 1.25rem;

@@ -7,30 +7,43 @@ export default function Testimonials() {
 
   const testimonials = [
     {
-      quote: "Pehle manual khata register me entries krte krte dimaag kharab ho jata tha. Credit tracking me bohot galatiyan hoti thi. Jab se DukaanSarthi app use kiya hai, credit links WhatsApp pr auto-send ho jaate hain aur 2 din ke andar paise wapas mil jate hain. Billing bhi bohot fast hai!",
-      name: "Ramesh Verma",
-      business: "Verma General Store",
-      location: "Indore, MP",
+      quote: "DukaanSarthi ne hamari store ki billing ko bahut asaan bana diya hai. Pehle register maintain karna padta tha, ab sab kuchh mobile par ho jata hai. Inventory track karna bhi ab bilkul mushkil nahi lagta.",
+      name: "Prakash Sharma",
+      business: "Sriram Mart",
       avatarBg: "#00B5A5",
       type: "Grocery & Retail",
       rating: 5
     },
     {
-      quote: "As a distributor, managing wholesale inventory was always a nightmare. Barcode scan support on DukaanSarthi is seamless. We sync our desktop app in office with mobile app used by staff in warehouse. Uptime is outstanding and we work completely offline without issues.",
-      name: "Sanjay Singhal",
-      business: "Singhal Enterprises",
-      location: "Jaipur, Rajasthan",
+      quote: "Humari clothing store ke liye yeh best app hai. Barcode scanning se fast billing hoti hai aur customers ko WhatsApp par turant bill mil jata hai. Business grow karne me DukaanSarthi ne bahut madad ki hai!",
+      name: "Piyush Singh",
+      business: "Fashion World",
       avatarBg: "#0A66C2",
+      type: "Clothing & Apparel",
+      rating: 5
+    },
+    {
+      quote: "Udhaar ka hisaab rakhna ab bahut simple ho gaya hai. Auto-reminders se time par payment mil jati hai aur manual entries ki tension khatam ho gayi hai. Is app ka interface kaafi user-friendly hai.",
+      name: "Pramod Kumar Sha",
+      business: "Jitendravastralay",
+      avatarBg: "#6366f1",
+      type: "Clothing & Retail",
+      rating: 5
+    },
+    {
+      quote: "Wholesale aur retail dono ka stock manage karna pehle bahut confusing tha. DukaanSarthi ke saath ab offline mode me bhi aaram se kaam ho jata hai aur GST reports 5 minute me nikal aati hain.",
+      name: "Anil Singh",
+      business: "Shree Millete",
+      avatarBg: "#10b981",
       type: "Wholesale Distributor",
       rating: 5
     },
     {
-      quote: "Vyapaar App hum pehle use krte the, pr DukaanSarthi ka interface zyada clean aur fast hai. App bilkul lag nahi karta. GSTR-1 file karna ab 5 minute ka kaam reh gaya hai. Customer support bhi bohot supportive hai jab hume onboarding me help chahiye thi.",
-      name: "Amit & Priya Jain",
-      business: "Jain Garments",
-      location: "Chandni Chowk, Delhi",
-      avatarBg: "#6366f1",
-      type: "Clothing & Apparel",
+      quote: "App bilkul hang nahi karta aur customer support bahut accha hai. Har choti badi problem ka solution turant mil jata hai. Mujhe yeh app har dukaandar ko recommend karna chahiye.",
+      name: "Nagendra Manto",
+      business: "KGP",
+      avatarBg: "#f59e0b",
+      type: "General Store",
       rating: 5
     }
   ];
@@ -50,7 +63,7 @@ export default function Testimonials() {
         {/* Section Header */}
         <div className="section-header text-center">
           <div className="badge badge-primary">CLIENT TESTIMONIALS</div>
-          <h2 className="with-line center">Loved by 1,000+ Business Owners</h2>
+          <h2 className="with-line center">Loved by 2500+ Business Owners</h2>
           <p className="section-subtitle">
             Read stories of how retailers and wholesalers changed their traditional billing setups to grow profits with DukaanSarthi.
           </p>
@@ -86,7 +99,6 @@ export default function Testimonials() {
                   <p className="author-meta">
                     <strong>{testimonials[activeIndex].business}</strong> ({testimonials[activeIndex].type})
                   </p>
-                  <p className="author-loc">{testimonials[activeIndex].location}</p>
                 </div>
               </div>
             </div>

@@ -410,8 +410,25 @@ export default function ShopSectors() {
     }
   };
 
-  // Dispatch custom select-sector event and scroll to contact
   const handleSectorCTA = (sectorId) => {
+    const sectorLinks = {
+      "retail_kirana": "/kirana-billing-software",
+      "retail_garment": "/erp-for-apparel-stores",
+      "retail_shoe": "/erp-for-apparel-stores",
+      "retail_boutique": "/erp-for-apparel-stores",
+      "mfg_bakery": "/erp-for-manufacturing",
+      "mfg_food": "/erp-for-manufacturing",
+      "mfg_garment": "/erp-for-manufacturing",
+      "mfg_shoe": "/erp-for-manufacturing",
+      "mfg_electronics": "/erp-for-manufacturing",
+      "mfg_toys": "/erp-for-manufacturing",
+    };
+
+    if (sectorLinks[sectorId]) {
+      window.open(sectorLinks[sectorId], '_blank');
+      return;
+    }
+
     const contactSection = document.getElementById('contact');
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: 'smooth' });
