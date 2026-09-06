@@ -9,7 +9,7 @@ export default function CompaniesMarquee() {
   return (
     <section className="marquee-section">
       <div className="container">
-        <p className="marquee-label">TRUSTED BY 5,000+ RETAIL BUSINESSES ACROSS INDIA</p>
+        <p className="marquee-label">TRUSTED BY 2500+ RETAIL BUSINESSES ACROSS INDIA</p>
       </div>
       
       <div className="marquee-container">

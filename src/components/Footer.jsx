@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from './Logo';
 import { Smartphone, Monitor, ChevronRight, ShieldCheck } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Footer() {
   return (
@@ -14,7 +15,7 @@ export default function Footer() {
           <div className="footer-col-brand">
             <Logo width={180} height={45} colorMode="cyan" className="footer-logo" />
             <p className="brand-pitch">
-              DukaanSarthi is India's upcoming smart ERP & accounting software. We empower retail shop owners, wholesale distributors, and manufacturers with rapid GST billing, smart stock management, and automatic credit tracking.
+              DukaanSarthi is India's trusted smart ERP & accounting software. We empower retail shop owners, wholesale distributors, and manufacturers with rapid GST billing, smart stock management, and automatic credit tracking.
             </p>
             <div className="security-certification">
               <ShieldCheck className="cert-icon" size={16} />
@@ -28,8 +29,9 @@ export default function Footer() {
             <ul>
               <li><a href="#features"><ChevronRight size={12} /> Core Features</a></li>
               <li><a href="#demo"><ChevronRight size={12} /> Interactive Invoicing</a></li>
-              <li><a href="#calculator"><ChevronRight size={12} /> ROI Calculator</a></li>
-              <li><a href="#pricing"><ChevronRight size={12} /> Pricing Plans</a></li>
+              <li><a href="/#pricing"><ChevronRight size={12} /> Pricing</a></li>
+              <li><Link href="/resources"><ChevronRight size={12} /> Blog & Resources</Link></li>
+              <li><a href="/#contact"><ChevronRight size={12} /> Contact Us</a></li>
             </ul>
           </div>
 
@@ -39,8 +41,19 @@ export default function Footer() {
             <ul>
               <li><a href="#contact"><ChevronRight size={12} /> Request Free Demo</a></li>
               <li><a href="#faq"><ChevronRight size={12} /> FAQs Support</a></li>
-              <li><a href="#"><ChevronRight size={12} /> Privacy Policy</a></li>
-              <li><a href="#"><ChevronRight size={12} /> Terms of Service</a></li>
+              <li><a href="/privacy-policy"><ChevronRight size={12} /> Privacy Policy</a></li>
+              <li><a href="/terms-of-service"><ChevronRight size={12} /> Terms of Service</a></li>
+            </ul>
+          </div>
+
+          {/* Col X: Solutions (SEO Pages) */}
+          <div className="footer-col-links">
+            <h4>Solutions</h4>
+            <ul>
+              <li><a href="/kirana-billing-software" target="_blank"><ChevronRight size={12} /> Kirana Store</a></li>
+              <li><a href="/erp-for-apparel-stores" target="_blank"><ChevronRight size={12} /> Apparel & Clothing</a></li>
+              <li><a href="/billing-software-for-restaurants" target="_blank"><ChevronRight size={12} /> Restaurants POS</a></li>
+              <li><a href="/erp-for-manufacturing" target="_blank"><ChevronRight size={12} /> Manufacturing ERP</a></li>
             </ul>
           </div>
 
@@ -51,7 +64,7 @@ export default function Footer() {
             
             <div className="download-buttons-stack">
               {/* Play Store */}
-              <a href="#" className="footer-download-btn">
+              <a href="https://play.google.com/store/apps/details?id=com.dukaansarthi.app" target="_blank" rel="noreferrer" className="footer-download-btn">
                 <Smartphone size={20} className="dl-btn-icon" />
                 <div>
                   <span className="dl-sub">DOWNLOAD FOR</span>
@@ -60,7 +73,7 @@ export default function Footer() {
               </a>
 
               {/* Windows PC Setup */}
-              <a href="#" className="footer-download-btn desktop-btn">
+              <a href="/downloads/DukaanSarthi-Setup.exe" className="footer-download-btn desktop-btn">
                 <Monitor size={20} className="dl-btn-icon" />
                 <div>
                   <span className="dl-sub">DOWNLOAD FOR</span>
@@ -113,7 +126,7 @@ export default function Footer() {
 
         .footer-grid {
           display: grid;
-          grid-template-columns: 2fr 1fr 1fr 1.5fr;
+          grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
           gap: 40px;
           text-align: left;
         }

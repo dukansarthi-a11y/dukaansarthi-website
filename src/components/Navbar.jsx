@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import Logo from './Logo';
-import { Menu, X, ArrowRight, Download } from 'lucide-react';
+import { Menu, X, ArrowRight, Download, ChevronDown } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,23 +34,37 @@ export default function Navbar() {
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
-        <a href="#" className="nav-logo-link">
+        <a href="/" className="nav-logo-link">
           <Logo width={180} height={45} colorMode="cyan" />
         </a>
 
         {/* Desktop Menu */}
         <div className="nav-menu-desktop">
+          <div className="dropdown">
+            <button className="nav-link dropdown-toggle">
+              Solutions <ChevronDown size={14} />
+            </button>
+            <div className="dropdown-menu">
+              <a href="/kirana-billing-software" target="_blank" rel="noopener noreferrer" className="dropdown-item">Kirana Store</a>
+              <a href="/erp-for-apparel-stores" target="_blank" rel="noopener noreferrer" className="dropdown-item">Apparel & Clothing</a>
+              <a href="/billing-software-for-restaurants" target="_blank" rel="noopener noreferrer" className="dropdown-item">Restaurants POS</a>
+              <a href="/erp-for-manufacturing" target="_blank" rel="noopener noreferrer" className="dropdown-item">Manufacturing ERP</a>
+            </div>
+          </div>
           {navLinks.map((link) => (
-            <a key={link.name} href={link.href} className="nav-link">
-              {link.name}
-            </a>
+            link.name === 'Resources' ? (
+              <Link key={link.name} href={link.href} className="nav-link">
+                {link.name}
+              </Link>
+            ) : (
+              <a key={link.name} href={link.href} className="nav-link">
+                {link.name}
+              </a>
+            )
           ))}
         </div>
 
         <div className="nav-actions-desktop">
-          <a href="#contact" className="btn btn-outline-primary btn-sm">
-            Book Demo
-          </a>
           <a href="#download" className="btn btn-primary btn-sm">
             <Download size={16} /> Download App
           </a>
@@ -68,6 +83,17 @@ export default function Navbar() {
       {/* Mobile Menu Drawer */}
       <div className={`nav-menu-mobile ${isOpen ? 'open' : ''}`}>
         <div className="nav-menu-mobile-content">
+          <details className="mobile-dropdown">
+            <summary className="nav-link-mobile">
+              Solutions <ChevronDown size={18} style={{ float: 'right', marginTop: '4px' }} />
+            </summary>
+            <div className="mobile-dropdown-content">
+              <a href="/kirana-billing-software" target="_blank" rel="noopener noreferrer" className="mobile-dropdown-item" onClick={() => setIsOpen(false)}>Kirana Store</a>
+              <a href="/erp-for-apparel-stores" target="_blank" rel="noopener noreferrer" className="mobile-dropdown-item" onClick={() => setIsOpen(false)}>Apparel & Clothing</a>
+              <a href="/billing-software-for-restaurants" target="_blank" rel="noopener noreferrer" className="mobile-dropdown-item" onClick={() => setIsOpen(false)}>Restaurants POS</a>
+              <a href="/erp-for-manufacturing" target="_blank" rel="noopener noreferrer" className="mobile-dropdown-item" onClick={() => setIsOpen(false)}>Manufacturing ERP</a>
+            </div>
+          </details>
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -79,13 +105,6 @@ export default function Navbar() {
             </a>
           ))}
           <div className="nav-mobile-actions">
-            <a
-              href="#contact"
-              className="btn btn-outline-primary"
-              onClick={() => setIsOpen(false)}
-            >
-              Book Demo
-            </a>
             <a
               href="#download"
               className="btn btn-primary"
@@ -229,11 +248,100 @@ export default function Navbar() {
           padding-left: 8px;
         }
 
+        .mobile-dropdown summary {
+          list-style: none;
+          cursor: pointer;
+        }
+
+        .mobile-dropdown summary::-webkit-details-marker {
+          display: none;
+        }
+
+        .mobile-dropdown-content {
+          display: flex;
+          flex-direction: column;
+          background: rgba(0, 181, 165, 0.03);
+          border-left: 2px solid var(--primary);
+          margin-top: 8px;
+          margin-bottom: 8px;
+          border-radius: 0 8px 8px 0;
+        }
+
+        .mobile-dropdown-item {
+          padding: 12px 16px;
+          color: var(--text-main);
+          font-weight: 500;
+          font-size: 1rem;
+          text-decoration: none;
+          border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .mobile-dropdown-item:last-child {
+          border-bottom: none;
+        }
+
         .nav-mobile-actions {
           display: flex;
           flex-direction: column;
           gap: 12px;
           margin-top: 20px;
+        }
+
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+
+        .dropdown-toggle {
+          background: none;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          font-family: inherit;
+          font-size: inherit;
+          color: inherit;
+        }
+
+        .dropdown-menu {
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%) translateY(10px);
+          background-color: var(--white);
+          min-width: 200px;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+          border-radius: 8px;
+          border: 1px solid var(--border);
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.2s ease;
+          display: flex;
+          flex-direction: column;
+          padding: 8px 0;
+          z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu {
+          opacity: 1;
+          visibility: visible;
+          transform: translateX(-50%) translateY(0);
+        }
+
+        .dropdown-item {
+          padding: 10px 20px;
+          color: var(--text-main);
+          text-decoration: none;
+          font-weight: 500;
+          font-size: 0.9rem;
+          transition: background-color 0.2s, color 0.2s;
+        }
+
+        .dropdown-item:hover {
+          background-color: rgba(0, 181, 165, 0.05);
+          color: var(--primary);
         }
 
         @media (max-width: 1024px) {

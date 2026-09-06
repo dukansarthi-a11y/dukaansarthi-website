@@ -152,7 +152,7 @@ export default function Calculator() {
             </div>
 
             <a href="#contact" className="btn btn-white btn-lg calc-cta-btn">
-              Claim Your Savings - Get DukaanSarthi
+              Book Free Demo - Get DukaanSarthi
             </a>
           </div>
 

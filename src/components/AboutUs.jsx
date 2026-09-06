@@ -20,7 +20,7 @@ export default function AboutUs() {
             
             <div className="about-stats">
               <div className="stat-item">
-                <h3>1,000+</h3>
+                <h3>2500+</h3>
                 <span>Happy Clients</span>
               </div>
               <div className="stat-item">

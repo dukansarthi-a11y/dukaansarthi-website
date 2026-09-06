@@ -17,27 +17,27 @@ export default function GrowthImpact() {
   const stories = [
     {
       id: 1,
-      name: "Ramesh Gupta",
-      shop: "Gupta General Store",
-      image: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
+      name: "Prakash Sharma",
+      shop: "Sriram Mart",
+      avatarBg: "#0ea5e9",
       metric: "+45% Monthly Sales",
       quote: "Before DukaanSarthi, I lost track of Udhaar and inventory. Now, automated WhatsApp reminders recover my money 3x faster. My monthly income has shot up!",
       rating: 5
     },
     {
       id: 2,
-      name: "Sneha Retailers",
-      shop: "Sneha Garments & Boutique",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
+      name: "Piyush Singh",
+      shop: "Fashion World",
+      avatarBg: "#8b5cf6",
       metric: "Zero Dead Stock",
       quote: "The barcode scanning and low-stock alerts mean I never over-order or run out of bestsellers. Our profits increased purely by stopping wastage.",
       rating: 5
     },
     {
       id: 3,
-      name: "Vikram Singh",
-      shop: "Singh Supermart (3 Outlets)",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80",
+      name: "Anil Singh",
+      shop: "Shree Millet",
+      avatarBg: "#10b981",
       metric: "₹1.2L CA Fees Saved",
       quote: "The 1-click GST GSTR-1 & 3B reports saved me lakhs in accountant fees. My multi-store inventory is finally synced in real-time.",
       rating: 5
@@ -45,24 +45,24 @@ export default function GrowthImpact() {
   ];
 
   return (
-    <section className="growth-section section section-bg-dark" id="impact">
+    <section className="growth-section section" id="impact">
       <div className="container">
         
         {/* Section Header */}
         <div className="section-header text-center">
           <div className="badge badge-teal">PROVEN ROI & GROWTH</div>
-          <h2 className="with-line center text-white">Transforming Shops into Smart Businesses</h2>
-          <p className="section-subtitle text-gray-300">
-            DukaanSarthi isn't just a billing software. It's a revenue-generating engine that recovers bad debt, optimizes stock, and multiplies your income.
+          <h2 className="with-line center text-slate-900">Transforming Shops into Smart Businesses</h2>
+          <p className="section-subtitle text-slate-600">
+            DukaanSarthi isn&apos;t just a billing software. It&apos;s a revenue-generating engine that recovers bad debt, optimizes stock, and multiplies your income.
           </p>
         </div>
 
         <div className="impact-grid">
           
           {/* Left Side: Before vs After Interactive */}
-          <div className="impact-interactive card glass-card-dark">
+          <div className="impact-interactive card glass-card-light">
             <div className="impact-toggle-header">
-              <h3>The DukaanSarthi Effect</h3>
+              <h3 className="text-slate-900">The DukaanSarthi Effect</h3>
               <div className="custom-toggle">
                 <button 
                   className={`toggle-btn ${!showAfter ? 'active error' : ''}`}
@@ -158,9 +158,14 @@ export default function GrowthImpact() {
           {/* Right Side: Success Stories */}
           <div className="success-stories-wrapper">
             {stories.map((story) => (
-              <div key={story.id} className="story-card card glass-card-dark">
+              <div key={story.id} className="story-card card glass-card-light">
                 <div className="story-header">
-                  <img src={story.image} alt={story.name} className="story-avatar" />
+                  <div 
+                    className="story-avatar-initials" 
+                    style={{ backgroundColor: story.avatarBg }}
+                  >
+                    {story.name.charAt(0)}
+                  </div>
                   <div className="story-meta">
                     <h4>{story.name}</h4>
                     <span>{story.shop}</span>
@@ -174,7 +179,7 @@ export default function GrowthImpact() {
                     {story.metric}
                   </div>
                 </div>
-                <p className="story-quote">"{story.quote}"</p>
+                <p className="story-quote">&quot;{story.quote}&quot;</p>
               </div>
             ))}
           </div>
@@ -186,36 +191,57 @@ export default function GrowthImpact() {
         .growth-section {
           position: relative;
           overflow: hidden;
+          background-color: #f0f9ff;
+          background-image: 
+            linear-gradient(rgba(255, 255, 255, 0.7) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.7) 1px, transparent 1px),
+            linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+          background-size: 60px 60px, 60px 60px, 100% 100%;
+          background-position: center center;
+          padding-top: 80px;
+          padding-bottom: 80px;
+          z-index: 1;
         }
         
+        .growth-section::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 70%);
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .growth-section > .container {
+          position: relative;
+          z-index: 1;
+        }
+
         .badge-teal {
-          background-color: rgba(20, 184, 166, 0.2);
-          color: #2dd4bf;
-          border: 1px solid rgba(20, 184, 166, 0.3);
+          background-color: rgba(14, 165, 233, 0.1);
+          color: #0284c7;
+          border: 1px solid rgba(14, 165, 233, 0.2);
+          backdrop-filter: blur(4px);
         }
 
-        .text-teal {
-          color: #2dd4bf !important;
-        }
-
-        .text-gray-300 {
-          color: #cbd5e1 !important;
-        }
+        .text-slate-900 { color: #0f172a !important; }
+        .text-slate-600 { color: #475569 !important; }
+        .text-teal { color: #0284c7 !important; }
 
         .impact-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 40px;
-          margin-top: 48px;
+          margin-top: 56px;
         }
 
-        .glass-card-dark {
-          background: rgba(30, 41, 59, 0.7);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-          color: var(--white);
+        .glass-card-light {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 1);
+          box-shadow: 0 20px 40px -10px rgba(14, 165, 233, 0.15);
+          color: #1e293b;
         }
 
         /* Left Interactive Panel */
@@ -237,20 +263,21 @@ export default function GrowthImpact() {
         .impact-toggle-header h3 {
           font-size: 1.5rem;
           margin: 0;
+          color: #0f172a;
         }
 
         .custom-toggle {
           display: flex;
-          background: rgba(15, 23, 42, 0.8);
+          background: #f1f5f9;
           border-radius: 50px;
           padding: 4px;
-          border: 1px solid rgba(255,255,255,0.05);
+          border: 1px solid #e2e8f0;
         }
 
         .toggle-btn {
           background: transparent;
           border: none;
-          color: #94a3b8;
+          color: #64748b;
           padding: 8px 16px;
           border-radius: 50px;
           font-size: 0.85rem;
@@ -260,15 +287,15 @@ export default function GrowthImpact() {
         }
 
         .toggle-btn.active.error {
-          background: rgba(239, 68, 68, 0.2);
-          color: #fca5a5;
-          border: 1px solid rgba(239, 68, 68, 0.3);
+          background: rgba(239, 68, 68, 0.1);
+          color: #dc2626;
+          border: 1px solid rgba(239, 68, 68, 0.2);
         }
 
         .toggle-btn.active.success {
-          background: rgba(20, 184, 166, 0.2);
-          color: #2dd4bf;
-          border: 1px solid rgba(20, 184, 166, 0.3);
+          background: rgba(14, 165, 233, 0.1);
+          color: #0284c7;
+          border: 1px solid rgba(14, 165, 233, 0.2);
         }
 
         .impact-data-content {
@@ -302,47 +329,48 @@ export default function GrowthImpact() {
 
         .metric-row.bad .m-icon {
           background: rgba(239, 68, 68, 0.1);
-          color: #f87171;
+          color: #ef4444;
         }
 
         .metric-row.good .m-icon {
-          background: rgba(20, 184, 166, 0.1);
-          color: #2dd4bf;
+          background: rgba(14, 165, 233, 0.1);
+          color: #0284c7;
         }
 
         .m-text h4 {
           font-size: 1.1rem;
           margin-bottom: 4px;
-          color: var(--white);
+          color: #0f172a;
         }
 
         .metric-row.good .m-text h4 {
-          color: #2dd4bf;
+          color: #0369a1;
         }
 
         .metric-row.bad .m-text h4 {
-          color: #fca5a5;
+          color: #b91c1c;
         }
 
         .m-text p {
           font-size: 0.9rem;
-          color: #94a3b8;
+          color: #475569;
           line-height: 1.4;
         }
 
         /* Animated Chart */
         .impact-chart-box {
-          background: rgba(15, 23, 42, 0.6);
+          background: #ffffff;
           border-radius: var(--radius-md);
           padding: 24px;
-          border: 1px solid rgba(255,255,255,0.05);
+          border: 1px solid #e2e8f0;
           margin-top: auto;
+          box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
         }
 
         .chart-title {
           font-size: 0.85rem;
-          font-weight: 600;
-          color: #94a3b8;
+          font-weight: 700;
+          color: #64748b;
           margin-bottom: 24px;
           text-align: center;
           text-transform: uppercase;
@@ -355,7 +383,7 @@ export default function GrowthImpact() {
           align-items: flex-end;
           height: 120px;
           padding-bottom: 10px;
-          border-bottom: 1px solid rgba(255,255,255,0.1);
+          border-bottom: 1px solid #e2e8f0;
         }
 
         .bar-wrapper {
@@ -375,12 +403,12 @@ export default function GrowthImpact() {
 
         .base-bar {
           height: 40px;
-          background: #475569;
+          background: #cbd5e1;
         }
 
         .growth-bar {
-          height: 0px; /* Start at 0 for animation */
-          background: linear-gradient(180deg, #2dd4bf 0%, rgba(45, 212, 191, 0.2) 100%);
+          height: 0px; 
+          background: linear-gradient(180deg, #38bdf8 0%, rgba(56, 189, 248, 0.2) 100%);
         }
 
         .growth-bar.animate-mid { height: 70px; }
@@ -390,7 +418,7 @@ export default function GrowthImpact() {
           position: absolute;
           bottom: -24px;
           font-size: 0.75rem;
-          color: #94a3b8;
+          color: #64748b;
         }
 
         .bar-val {
@@ -398,6 +426,7 @@ export default function GrowthImpact() {
           top: -24px;
           font-size: 0.8rem;
           font-weight: 700;
+          color: #0f172a;
         }
 
         /* Right Side: Success Stories */
@@ -413,8 +442,9 @@ export default function GrowthImpact() {
         }
 
         .story-card:hover {
-          transform: translateX(-10px);
-          border-color: rgba(20, 184, 166, 0.4);
+          transform: translateY(-5px);
+          border-color: #38bdf8;
+          box-shadow: 0 20px 40px -10px rgba(14, 165, 233, 0.2);
         }
 
         .story-header {
@@ -425,12 +455,18 @@ export default function GrowthImpact() {
           flex-wrap: wrap;
         }
 
-        .story-avatar {
+        .story-avatar-initials {
           width: 50px;
           height: 50px;
           border-radius: 50%;
-          object-fit: cover;
-          border: 2px solid #2dd4bf;
+          border: 3px solid #ffffff;
+          box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 800;
+          font-size: 1.5rem;
+          color: #ffffff;
         }
 
         .story-meta {
@@ -440,12 +476,12 @@ export default function GrowthImpact() {
         .story-meta h4 {
           font-size: 1.1rem;
           margin-bottom: 2px;
-          color: var(--white);
+          color: #0f172a;
         }
 
         .story-meta span {
           font-size: 0.75rem;
-          color: #94a3b8;
+          color: #64748b;
           display: block;
           margin-bottom: 4px;
         }
@@ -464,17 +500,14 @@ export default function GrowthImpact() {
 
         .story-quote {
           font-size: 0.95rem;
-          color: #cbd5e1;
-          line-height: 1.5;
+          color: #334155;
+          line-height: 1.6;
           font-style: italic;
         }
 
         @media (max-width: 1024px) {
           .impact-grid {
             grid-template-columns: 1fr;
-          }
-          .story-card:hover {
-            transform: translateY(-5px);
           }
         }
         

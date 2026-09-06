@@ -128,16 +128,6 @@ export default function Contact() {
 
             </div>
 
-            <div className="whatsapp-help-card">
-              <MessageCircle size={24} className="wa-icon" />
-              <div>
-                <strong>Need Instant Onboarding Help?</strong>
-                <p>Chat with our sales team directly on WhatsApp for instant activation codes.</p>
-                <a href="https://wa.me/919873234071" target="_blank" rel="noopener noreferrer" className="wa-link">
-                  Chat on WhatsApp &rarr;
-                </a>
-              </div>
-            </div>
           </div>
 
           {/* Right: Booking Form Card */}

@@ -1,22 +1,60 @@
 import React from 'react';
 import { ArrowRight, Play, CheckCircle2, ShieldCheck, Star } from 'lucide-react';
 
-export default function Hero() {
+export default function Hero({ 
+  title = <>Apne Business Ka <span className="text-gradient">Sarthi</span>.<br />Smart Billing & ERP App</>,
+  subtitle = "DukaanSarthi matches the workflow of business apps like Vyapaar but elevates it with modern interfaces, faster invoice generation, offline sync, and real-time inventory management. Made in India for Indian Dukaandars.",
+  badgeText = "Rated 4.8/5 on Google Play Store",
+  industry = null
+}) {
+  let themeStyle = {};
+  if (industry === 'kirana') {
+    themeStyle = { 
+      '--grad-primary': 'linear-gradient(135deg, #16a34a 0%, #22c55e 100%)', 
+      '--primary': '#16a34a', 
+      '--primary-rgb': '22, 163, 74',
+      '--bg-pattern': 'radial-gradient(rgba(22, 163, 74, 0.08) 1.5px, transparent 1.5px)',
+      '--bg-size': '24px 24px'
+    };
+  } else if (industry === 'apparel') {
+    themeStyle = { 
+      '--grad-primary': 'linear-gradient(135deg, #c026d3 0%, #e879f9 100%)', 
+      '--primary': '#c026d3', 
+      '--primary-rgb': '192, 38, 211',
+      '--bg-pattern': 'repeating-linear-gradient(45deg, rgba(192, 38, 211, 0.02) 0px, rgba(192, 38, 211, 0.02) 1px, transparent 1px, transparent 16px)',
+      '--bg-size': '100% 100%'
+    };
+  } else if (industry === 'restaurant') {
+    themeStyle = { 
+      '--grad-primary': 'linear-gradient(135deg, #ea580c 0%, #f97316 100%)', 
+      '--primary': '#ea580c', 
+      '--primary-rgb': '234, 88, 12',
+      '--bg-pattern': 'linear-gradient(rgba(234, 88, 12, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(234, 88, 12, 0.03) 1px, transparent 1px)',
+      '--bg-size': '40px 40px'
+    };
+  } else if (industry === 'manufacturing') {
+    themeStyle = { 
+      '--grad-primary': 'linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)', 
+      '--primary': '#2563eb', 
+      '--primary-rgb': '37, 99, 235',
+      '--bg-pattern': 'repeating-linear-gradient(-45deg, rgba(37, 99, 235, 0.03) 0, rgba(37, 99, 235, 0.03) 1px, transparent 1px, transparent 10px)',
+      '--bg-size': '100% 100%'
+    };
+  }
+
   return (
-    <section className="hero-section" id="home">
+    <section className={`hero-section ${industry ? `hero-${industry}` : ''}`} id="home" style={themeStyle}>
       <div className="container hero-container grid-2">
         {/* Left Side Info */}
         <div className="hero-content">
           <div className="badge badge-primary hero-badge">
-            <Star size={14} fill="currentColor" /> &nbsp;Rated 4.8/5 on Google Play Store
+            <Star size={14} fill="currentColor" /> &nbsp;{badgeText}
           </div>
           <h1 className="hero-title">
-            Apne Business Ka <span className="text-gradient">Sarthi</span>.
-            <br />
-            Smart Billing & ERP App
+            {title}
           </h1>
           <p className="hero-subtitle">
-            DukaanSarthi matches the workflow of business apps like Vyapaar but elevates it with modern interfaces, faster invoice generation, offline sync, and real-time inventory management. Made in India for Indian Dukaandars.
+            {subtitle}
           </p>
 
           {/* Value Props Checklist */}
@@ -38,7 +76,7 @@ export default function Hero() {
           {/* Action buttons */}
           <div className="btn-group hero-btn-group">
             <a href="#contact" className="btn btn-primary">
-              Book a Free Demo <ArrowRight size={18} />
+              Book Free Demo <ArrowRight size={18} />
             </a>
             <a href="#download" className="btn btn-secondary">
               Download Desktop App
@@ -58,7 +96,7 @@ export default function Hero() {
               <Star size={18} className="store-icon text-yellow" fill="currentColor" />
               <div>
                 <span className="store-label">TRUSTED BY</span>
-                <span className="store-title">1,000+ Retailers</span>
+                <span className="store-title">2500+ Retailers</span>
               </div>
             </div>
           </div>
@@ -72,8 +110,8 @@ export default function Hero() {
 
             {/* POS Illustration Background */}
             <img 
-              src="/pos_realistic.png" 
-              alt="Realistic POS System" 
+              src="/pos_isolated.jpg" 
+              alt="Modern Smart POS System" 
               className="pos-background-image float-anim"
             />
 
@@ -133,12 +171,28 @@ export default function Hero() {
       <style>{`
         .hero-section {
           padding: 160px 0 100px;
-          background: linear-gradient(180deg, rgba(0, 181, 165, 0.04) 0%, rgba(10, 102, 194, 0.02) 100%);
+          background: linear-gradient(180deg, rgba(var(--primary-rgb, 0, 181, 165), 0.04) 0%, rgba(10, 102, 194, 0.02) 100%);
           overflow: hidden;
+          position: relative;
+        }
+
+        .hero-section::before {
+          content: "";
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background-image: var(--bg-pattern, none);
+          background-size: var(--bg-size, 20px 20px);
+          opacity: 0.6;
+          z-index: 0;
+          pointer-events: none;
+          mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+          -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
         }
 
         .hero-container {
           align-items: center;
+          position: relative;
+          z-index: 2;
         }
 
         .hero-badge {
@@ -206,7 +260,7 @@ export default function Hero() {
         .store-icon {
           color: var(--primary);
           padding: 8px;
-          background-color: rgba(var(--primary-rgb), 0.1);
+          background-color: rgba(var(--primary-rgb, 0, 181, 165), 0.1);
           border-radius: var(--radius-sm);
         }
 
@@ -246,18 +300,18 @@ export default function Hero() {
           position: absolute;
           width: 350px;
           height: 350px;
-          background: radial-gradient(circle, rgba(0, 181, 165, 0.15) 0%, rgba(10, 102, 194, 0.05) 70%);
+          background: radial-gradient(circle, rgba(var(--primary-rgb, 0, 181, 165), 0.2) 0%, rgba(10, 102, 194, 0.05) 70%);
           border-radius: 50%;
           top: 10%;
           right: 10%;
           z-index: 1;
-          filter: blur(20px);
+          filter: blur(25px);
         }
 
         .pos-background-image {
           position: absolute;
           width: 90%;
-          height: 350px;
+          height: 380px;
           left: 0;
           top: 20px;
           z-index: 2;
@@ -379,171 +433,179 @@ export default function Hero() {
         /* Mobile Mockup overlapping */
         .mockup-mobile {
           position: absolute;
-          width: 200px;
-          height: 380px;
-          right: 10px;
-          bottom: 10px;
+          width: 220px;
+          height: 440px;
+          right: -20px;
+          bottom: -20px;
           z-index: 3;
           padding: 0;
-          border-radius: 30px;
-          border: 6px solid var(--dark-light);
+          border-radius: 40px;
+          border: 8px solid #1e293b;
           overflow: hidden;
-          box-shadow: var(--shadow-xl);
-          background-color: var(--white);
+          box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3);
+          background-color: #f8fafc;
         }
 
         .mobile-header {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80px;
           height: 24px;
-          background-color: var(--dark-light);
-          position: relative;
+          background-color: #1e293b;
+          border-radius: 0 0 12px 12px;
           display: flex;
           justify-content: center;
           align-items: center;
-          gap: 8px;
+          gap: 6px;
+          z-index: 10;
         }
 
         .mobile-header .speaker {
-          width: 40px;
+          width: 32px;
           height: 4px;
-          background-color: #475569;
-          border-radius: 2px;
+          background-color: #334155;
+          border-radius: 4px;
         }
 
         .mobile-header .camera {
           width: 6px;
           height: 6px;
-          background-color: #475569;
+          background-color: #0f172a;
+          border: 2px solid #334155;
           border-radius: 50%;
         }
 
         .mobile-body {
-          padding: 16px;
+          padding: 40px 16px 20px;
           display: flex;
           flex-direction: column;
           gap: 16px;
-          height: calc(100% - 24px);
-          background-color: var(--light);
+          height: 100%;
+          background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
         }
 
         .mobile-branding {
           display: flex;
           align-items: center;
           gap: 8px;
-          font-weight: 700;
-          font-size: 0.85rem;
-          color: var(--primary);
+          font-weight: 800;
+          font-size: 0.95rem;
+          color: #0f172a;
         }
 
         .mobile-branding .d-logo {
-          width: 22px;
-          height: 22px;
-          background: var(--grad-primary);
-          color: var(--white);
-          border-radius: 50%;
+          width: 26px;
+          height: 26px;
+          background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+          color: #ffffff;
+          border-radius: 8px;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 0.65rem;
+          font-size: 0.8rem;
+          box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
         }
 
         .mobile-invoice-card {
-          background-color: var(--white);
-          border: 1px solid var(--border);
-          border-radius: 12px;
-          padding: 12px;
-          box-shadow: var(--shadow-sm);
+          background-color: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 16px;
+          padding: 16px;
+          box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
         }
 
         .invoice-status {
           display: flex;
           justify-content: space-between;
-          font-size: 0.6rem;
+          align-items: center;
+          font-size: 0.7rem;
           font-weight: 700;
-          color: var(--text-muted);
-          margin-bottom: 6px;
+          color: #64748b;
+          margin-bottom: 8px;
         }
 
         .status-badge {
           background-color: #dcfce7;
           color: #166534;
-          padding: 2px 6px;
-          border-radius: 10px;
+          padding: 4px 8px;
+          border-radius: 20px;
+          font-size: 0.6rem;
         }
 
         .invoice-amount {
-          font-size: 1.25rem;
+          font-size: 1.4rem;
           font-weight: 800;
-          color: var(--dark);
-          margin-bottom: 8px;
+          color: #0f172a;
+          margin-bottom: 12px;
         }
 
         .invoice-divider {
+          width: 100%;
           height: 1px;
-          background-color: var(--border);
-          margin-bottom: 8px;
+          background: repeating-linear-gradient(90deg, #cbd5e1, #cbd5e1 4px, transparent 4px, transparent 8px);
+          margin-bottom: 12px;
         }
 
         .invoice-details {
           display: flex;
           flex-direction: column;
-          gap: 2px;
-          font-size: 0.55rem;
-          font-weight: 600;
-          color: var(--text-muted);
+          gap: 4px;
+          font-size: 0.65rem;
+          color: #475569;
+          font-weight: 500;
         }
 
         .mobile-quick-actions {
           display: flex;
           justify-content: space-between;
+          gap: 8px;
           margin-top: auto;
         }
 
         .action-dot {
-          font-size: 0.65rem;
+          flex: 1;
+          background-color: #ffffff;
+          color: #0f172a;
+          font-size: 0.7rem;
           font-weight: 700;
-          color: var(--white);
-          background-color: var(--primary);
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 4px 6px -1px rgba(0, 181, 165, 0.2);
-          cursor: pointer;
+          padding: 12px 0;
+          border-radius: 12px;
+          text-align: center;
+          box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+          border: 1px solid #e2e8f0;
         }
 
-        .action-dot:nth-child(2) {
-          background-color: var(--secondary);
-        }
-
-        .action-dot:nth-child(3) {
-          background-color: #6366f1;
+        .action-dot:first-child {
+          background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+          color: #ffffff;
+          border: none;
         }
 
         /* Floating Notifications */
         .floating-notif {
           position: absolute;
-          background-color: var(--white);
-          border: 1px solid var(--border);
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 1);
+          padding: 12px 16px;
           border-radius: 50px;
-          padding: 8px 16px;
           display: flex;
           align-items: center;
           gap: 12px;
-          box-shadow: var(--shadow-lg);
+          box-shadow: 0 15px 35px -5px rgba(0,0,0,0.1);
           z-index: 4;
-          width: 240px;
         }
 
         .notif-1 {
+          top: -20px;
           left: -40px;
-          bottom: 60px;
         }
 
         .notif-2 {
-          top: 10px;
-          right: -20px;
+          top: 60%;
+          right: -50px;
         }
 
         .notif-icon-box {
@@ -553,26 +615,28 @@ export default function Hero() {
           display: flex;
           align-items: center;
           justify-content: center;
-          color: var(--white);
-          font-weight: 700;
+          color: #ffffff;
+          font-weight: 800;
           font-size: 1rem;
+          flex-shrink: 0;
         }
 
-        .bg-green { background-color: #22c55e; }
-        .bg-orange { background-color: #f97316; }
+        .bg-green { background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3); }
+        .bg-orange { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3); }
 
         .notif-label {
           display: block;
-          font-size: 0.7rem;
-          font-weight: 700;
-          color: var(--dark);
+          font-size: 0.75rem;
+          font-weight: 800;
+          color: #0f172a;
+          margin-bottom: 2px;
         }
 
         .notif-text {
           display: block;
           font-size: 0.65rem;
-          color: var(--text-muted);
-          font-weight: 600;
+          color: #475569;
+          font-weight: 500;
         }
 
         /* Float Animations */

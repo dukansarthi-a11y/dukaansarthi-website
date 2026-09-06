@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { FileText, Inbox, CreditCard, BarChart3, CheckCircle2, QrCode, Bell, MessageSquare, Award, ShoppingCart } from 'lucide-react';
+import { FileText, Inbox, CreditCard, BarChart3, CheckCircle2, QrCode, Bell, MessageSquare, Award, ShoppingCart, Globe } from 'lucide-react';
 
 export default function Features() {
   const [activeTab, setActiveTab] = useState('billing');
@@ -70,6 +70,19 @@ export default function Features() {
         'Bulk inventory updates and purchase inwards tracking.',
         'Maintain party-wise purchase and sales ledgers effortlessly.'
       ]
+    },
+    {
+      id: 'omnichannel',
+      label: 'Omni-Channel Sync',
+      icon: <Globe size={18} />,
+      title: 'Sync Offline & Online Sales Automatically',
+      description: 'DukaanSarthi provides seamless omni-channel capabilities. Connect your retail POS with your custom e-commerce website and mobile apps.',
+      bullets: [
+        'Live inventory sync between your physical store and online website.',
+        'Accept online e-commerce orders directly on your POS.',
+        'Unified dashboard to track offline footfall and online traffic.',
+        'One centralized catalog management for all sales channels.'
+      ]
     }
   ];
 
@@ -82,7 +95,7 @@ export default function Features() {
         {/* Section Header */}
         <div className="section-header text-center">
           <div className="badge badge-primary">POWERFUL ERP MODULES</div>
-          <h2 className="with-line center">Features Built for Ultimate Control</h2>
+          <h2 className="with-line center">GST Billing & Inventory Management Features</h2>
           <p className="section-subtitle">
             All the powerful business modules you need, designed to run smoothly on PCs, tablets, and smartphones.
           </p>
@@ -378,6 +391,44 @@ export default function Features() {
                     </div>
                   </div>
                 )}
+
+                {activeTab === 'omnichannel' && (
+                  <div className="mock-b2b-screen">
+                    <div className="b2b-header">
+                      <h4>Omni-Channel Sync</h4>
+                      <div className="status-badge delivered" style={{ background: '#ecfdf5', color: '#10b981', border: '1px solid #10b981' }}>Live Sync</div>
+                    </div>
+                    <div className="b2b-list">
+                      <div className="b2b-item ok-row">
+                        <div className="b2b-info">
+                          <h5>Custom E-Commerce Website</h5>
+                          <span>Auto-Sync Active | 1,200 Items synced</span>
+                        </div>
+                        <div className="b2b-status">
+                          <span className="status-badge delivered">Connected</span>
+                        </div>
+                      </div>
+                      <div className="b2b-item ok-row">
+                        <div className="b2b-info">
+                          <h5>Mobile App (Android/iOS)</h5>
+                          <span>Auto-Sync Active | 1,200 Items synced</span>
+                        </div>
+                        <div className="b2b-status">
+                          <span className="status-badge delivered">Connected</span>
+                        </div>
+                      </div>
+                      <div className="b2b-item pending-row">
+                        <div className="b2b-info">
+                          <h5>B2B Wholesale Portal</h5>
+                          <span>Awaiting configuration</span>
+                        </div>
+                        <div className="b2b-status">
+                          <span className="status-badge pending">Pending</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -414,7 +465,7 @@ export default function Features() {
           gap: 16px;
           flex-wrap: wrap;
           width: 100%;
-          max-width: 100vw;
+          max-width: 100%;
         }
 
         .tab-btn {
