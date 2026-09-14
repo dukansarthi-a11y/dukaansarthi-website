@@ -44,3 +44,6 @@ next-env.d.ts
 backend/target/
 .idea/
 *.iml
+
+# Local scripts
+run-backend.bat

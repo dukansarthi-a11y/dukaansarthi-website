@@ -3,7 +3,9 @@ import { ArrowRight, Play, CheckCircle2, ShieldCheck, Star } from 'lucide-react'
 
 export default function Hero({ 
   title = <>Apne Business Ka <span className="text-gradient">Sarthi</span>.<br />Smart Billing & ERP App</>,
-  subtitle = "DukaanSarthi matches the workflow of business apps like Vyapaar but elevates it with modern interfaces, faster invoice generation, offline sync, and real-time inventory management. Made in India for Indian Dukaandars.",
+  subtitle = "Run your shop smarter with DukaanSarthi.\n" +
+      "Fast billing. Smart inventory. Offline-ready. Real-time control.\n" +
+      "Made in India, built for every Dukaandar.",
   badgeText = "Rated 4.8/5 on Google Play Store",
   industry = null
 }) {
