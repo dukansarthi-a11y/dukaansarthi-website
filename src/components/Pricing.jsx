@@ -180,8 +180,8 @@ export default function Pricing() {
     {
       icon: <QrCode size={22} className="addon-icon" />,
       name: "Customer E-Commerce App",
-      price: "₹7,599",
-      type: "Per Year",
+      price: "₹5,500",
+      type: "Per Month",
       description: "Get a branded Android App on Google Play Store for your customers to order online directly."
     },
     {
